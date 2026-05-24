@@ -166,22 +166,22 @@
         font-family: var(--font-label);
         font-weight: var(--font-weight-bold, 700);
         font-size: var(--font-size-label);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background-color var(--transition-speed, 0.2s);
-}
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color var(--transition-speed, 0.2s);
+    }
 
-.btn-custom-white:hover {
-    background-color: var(--color-primary-50, #F0FEFF);
-}
+    .btn-custom-white:hover {
+        background-color: var(--color-primary-50, #F0FEFF);
+    }
 
-.btn-custom-save-new:disabled, 
-.btn-assign:disabled,
-.btn-custom-white:disabled {
-    background-color: var(--color-neutral-200, #e5e7eb) !important;
-    color: var(--color-neutral-400, #9ca3af) !important;
-    border-color: transparent !important;
-    cursor: not-allowed;
-}
+    .btn-custom-save-new:disabled, 
+    .btn-assign:disabled,
+    .btn-custom-white:disabled {
+        background-color: var(--color-neutral-200, #e5e7eb) !important;
+        color: var(--color-neutral-400, #9ca3af) !important;
+        border-color: transparent !important;
+        cursor: not-allowed;
+    }

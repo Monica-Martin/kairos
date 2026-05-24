@@ -62,11 +62,17 @@ export default class CtzSidebar extends LightningElement {
     }
 
     getActiveTab(){
-        const path = window.location.pathname;
-        const currentTab = this.tabs.find(tab=> path.includes(tab.url));
+        const path = window.location.pathname.toLowerCase();
+        
+        let currentTab = this.tabs.find(tab => path.includes(tab.url.toLowerCase()));
+        
         if (currentTab) {
             this.activeTab = currentTab.title;
-        } else {
+        } 
+        else if (path.includes('detalles-paciente')) {
+            this.activeTab = 'Pacientes';
+        } 
+        else {
             this.activeTab = 'Dashboard';
         }
     }

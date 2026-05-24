@@ -152,7 +152,7 @@ export default class Kanban extends LightningElement {
     const domingo = estructuraDias.shift();
     estructuraDias.push(domingo);
     this.diasSemana = estructuraDias;
-}
+    }
 
     formatearTarea(tarea) {
         const tipoTarea = tarea.Tarea__r?.CatalogoTareas__r?.Categoria__c || '';
@@ -165,6 +165,11 @@ export default class Kanban extends LightningElement {
             : '--:--';
 
         const configVisual = arrayTipos[tipoTarea] || arrayDefault;
+        let baseCardClass = configVisual.card;
+
+        if (tarea.IsBloqueada__c === true) {
+            baseCardClass += ' task-card--blocked'; 
+        }
 
         return {
             id: tarea.Id,
@@ -174,7 +179,9 @@ export default class Kanban extends LightningElement {
             hora: horaFormateada,
             puntos: puntosTarea,
             puntosFormateados: puntosTarea > 0 ? `+${puntosTarea} pts` : `${puntosTarea} pts`,
-            claseCard: configVisual.card,
+            
+            claseCard: baseCardClass, 
+            
             claseBadge: configVisual.badge,
             claseIcono: configVisual.claseIcono,
             icono: configVisual.icono,
@@ -191,7 +198,17 @@ export default class Kanban extends LightningElement {
             return;
         }
 
-        const { tareaId, puntos, titulo } = event.detail;
+        const { tareaId, puntos, titulo, bloqueada } = event.detail;
+
+        if (bloqueada === true) {
+            this.mostrarToast(
+                'Tarea Bloqueada', 
+                `El tiempo límite para la tarea "${titulo}" ha expirado. Ya no se puede completar.`, 
+                'error'
+            );
+            return;
+        }
+
         try {
             await checkTarea({ tareaId, puntos, titulo });
             this.mostrarToast('¡Buen trabajo!', `Se han sumado ${puntos} puntos por: ${titulo}`, 'success');

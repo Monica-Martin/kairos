@@ -33,8 +33,10 @@
 
                     <div class="column-body">
                         <template for:each={dia.tareas} for:item="tarea">
-                            <c-mini-card key={tarea.id} is-terapeuta={isTerapeuta} tarea={tarea} oncompletartarea={handleCompletarTarea} onabrirdetalles={handleAbrirDetalles}>
-                            </c-mini-card>
+                            <div key={tarea.id} class={tarea.claseCard}>
+                                <c-mini-card is-terapeuta={isTerapeuta} tarea={tarea} oncompletartarea={handleCompletarTarea} onabrirdetalles={handleAbrirDetalles}>
+                                </c-mini-card>
+                            </div>
                         </template>
                     </div>
                 </div>

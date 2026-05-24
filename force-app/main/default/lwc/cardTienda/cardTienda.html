@@ -1,0 +1,29 @@
+<template>
+    <div class="reward-card" if:true={recompensa}>
+        
+        <div class="reward-card__header">
+            <div class="icon-wrapper">
+                <lightning-icon icon-name="utility:favorite" size="small" class="icon-theme"></lightning-icon>
+            </div>
+            <span class="status-badge">Activo</span>
+        </div>
+
+        <div class="reward-card__body">
+            <h3 class="reward-title">{recompensa.CatalogoIncentivos__r.Name}</h3>
+            <p class="reward-desc">
+                Premio personalizado.
+            </p>
+        </div>
+
+        <div class="reward-card__footer">
+            <div class="reward-cost">
+                <lightning-icon icon-name="utility:favorite" size="x-small" variant="warning"></lightning-icon>
+                <span>{recompensa.Puntos__c}</span>
+            </div>
+            <button class="btn-redeem" onclick={handleRedeem}>
+                Canjear Premio
+            </button>
+        </div>
+        
+    </div>
+</template>

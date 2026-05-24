@@ -1,0 +1,112 @@
+
+.reward-card {
+    background-color: var(--color-secondary-100, #fefdf0);
+    border: 1px solid var(--color-neutral-200);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    height: 100%; 
+    box-sizing: border-box;
+}
+
+.reward-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-secondary-200);
+}
+
+
+.reward-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.icon-wrapper {
+    width: 48px;
+    height: 48px;
+    background-color: var(--color-white);
+    border-radius: var(--radius-pill);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-sm);
+}
+
+.icon-theme {
+    --sds-c-icon-color-foreground-default: var(--color-primary-700);
+}
+
+.status-badge {
+    background-color: var(--color-primary-100);
+    color: var(--color-primary-700);
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    font-size: var(--font-size-label-sm);
+    font-weight: var(--font-weight-bold);
+    text-transform: capitalize;
+}
+
+
+.reward-card__body {
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.reward-title {
+    font-family: var(--font-headline);
+    font-size: var(--font-size-h4);
+    color: var(--color-primary-800);
+    margin: 0;
+    line-height: 1.2;
+}
+
+.reward-desc {
+    font-size: var(--font-size-label);
+    color: var(--color-neutral-600);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.reward-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--spacing-sm);
+}
+
+.reward-cost {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-body-md);
+    color: var(--color-neutral-800);
+}
+
+.btn-redeem {
+    background-color: var(--color-primary-500);
+    color: var(--color-white);
+    border: none;
+    padding: 10px 16px;
+    border-radius: var(--radius-md);
+    font-family: var(--font-label);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-label);
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+}
+
+.btn-redeem:hover {
+    background-color: var(--color-primary-600);
+}
+
+.btn-redeem:active {
+    transform: scale(0.98);
+}

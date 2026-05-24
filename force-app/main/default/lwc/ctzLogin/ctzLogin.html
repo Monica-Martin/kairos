@@ -1,0 +1,60 @@
+<template>
+    <div class="login-wrapper">
+        <div class="login-card">
+            
+            <div class="login-card__header">
+                <div class="header-icon">
+                    <lightning-icon icon-name="utility:work_order" size="medium" class="icon-primary"></lightning-icon>
+                </div>
+                <h1 class="header-title">Kairós</h1>
+                <p class="header-subtitle">Clinical Management</p>
+            </div>
+
+            <form class="login-form" onkeyup={handleKeyUp} onsubmit={handleFormSubmit}>
+                
+                <div class="form-group">
+                    <label for="emailInput">Correo Electrónico</label>
+                    <div class="input-wrapper">
+                        <lightning-icon icon-name="utility:email" size="x-small" class="input-icon"></lightning-icon>
+                        <input 
+                            type="email" 
+                            id="emailInput" 
+                            data-id="username"
+                            class="form-input" 
+                            placeholder="usuario@clinica.com" 
+                            required 
+                        />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="passwordInput">Contraseña</label>
+                    <div class="input-wrapper">
+                        <lightning-icon icon-name="utility:lock" size="x-small" class="input-icon"></lightning-icon>
+                        <input 
+                            type="password" 
+                            id="passwordInput" 
+                            data-id="password"
+                            class="form-input" 
+                            placeholder="••••••••" 
+                            required 
+                        />
+                    </div>
+                </div>
+
+                <div class="form-options">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="rememberMe" />
+                        <span class="checkmark"></span>
+                        Recordarme
+                    </label>
+
+                    <a href="/kairos/s/login/ForgotPassword" class="forgot-link">¿Olvidaste tu contraseña?</a>
+                </div>
+
+                <button type="button" onclick={handleLogin} class="btn btn--primary btn--full">Log in</button>
+                
+            </form>
+        </div>
+    </div>
+</template>

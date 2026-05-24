@@ -1,0 +1,39 @@
+<template>
+    <aside class="sidebar-content">
+        <div class="slds-col">
+            <div class="user-profile">
+                <div class="brand-container">
+                    <div class="logo-placeholder">
+                        <img src={logo} class="logo" alt="">
+                    </div>
+                    <div class="user-info">
+                        <h3>Kairós</h3>
+                        <p class="subtitle">{subtitle}</p>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul>
+                    <template for:each={tabs} for:item="tab">
+                        <li class={tab.className} key={tab.title} data-id={tab.title} onclick={handleTabClick}>
+                            <a href={tab.url} class="nav-link">
+                                <lightning-icon icon-name={tab.icon} size="small" class="nav-icon"></lightning-icon>
+                                <span>{tab.title}</span>
+                            </a>
+                        </li> 
+                    </template>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="slds-col sidebar-footer">
+            <div class="footer-item logout">
+                <a href={logoutLink} class="nav-link">
+                    <lightning-icon icon-name="utility:logout" size="small" class="nav-icon"></lightning-icon>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </div>
+    </aside>
+</template>

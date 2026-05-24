@@ -1,0 +1,46 @@
+<template>
+    <template if:true={tarea}>
+        
+        <div class={cardClasses} onclick={handleCardClick}>
+            
+            <div class="mini-card__header">
+                <div class="slds-grid slds-grid_vertical-align-center">
+                    <span class={badgeClasses}>{tarea.tipo}</span>
+                    
+                    <div class="slds-m-left_xx-small">
+                        <lightning-icon 
+                            icon-name={tarea.icono} 
+                            size="xx-small" 
+                            class={tarea.claseIcono}>
+                        </lightning-icon>
+                    </div>
+                </div>
+                
+                <div onclick={handleStopPropagation}>
+                    <template if:false={isTerapeuta}>
+                        <lightning-input 
+                            type="checkbox" 
+                            label="Completada"
+                            variant="label-hidden" 
+                            checked={isCompleted}
+                            disabled={isLocked}
+                            onchange={handleCheckChange}
+                            title="Marcar como completada">
+                        </lightning-input>
+                    </template>
+                </div>
+            </div>
+
+            <div class="mini-card__body">
+                <h4 class="card-title">{tarea.titulo}</h4>
+            </div>
+
+            <div class="mini-card__footer">
+                <span class="card-time">{tarea.hora}</span>
+                <span class={pointsClasses}>{tarea.puntosFormateados}</span>
+            </div>
+            
+        </div>
+        
+    </template>
+</template>

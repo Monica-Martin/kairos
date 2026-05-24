@@ -1,0 +1,83 @@
+<template>
+    <div class="library-container">
+        <c-ctz-header title="Gestión de Catálogos Globales" subtitle="Gestiona tareas conductuales y recompensas estandarizadas ">
+        </c-ctz-header>
+        <div class="library-card">
+            <div class="tabs-nav">
+                <button class={tasksTabClass} onclick={handleTabChange} data-tab="tasks">
+                    <lightning-icon icon-name="utility:page" size="x-small" class="tab-icon"></lightning-icon>
+                    Catálogo de Tareas
+                </button>
+                <button class={rewardsTabClass} onclick={handleTabChange} data-tab="rewards">
+                    <lightning-icon icon-name="utility:favorite" size="x-small" class="tab-icon"></lightning-icon>
+                    Catálogo de Incentivos
+                </button>
+            </div>
+
+            <template if:true={isTasksTab}>
+                <div class="tab-content">
+                    <div class="content-header">
+                        <button class="btn-assign" onclick={handleNewTarea}>
+                            <lightning-icon icon-name="utility:add" size="x-small" variant="inverse" class="margin-right"></lightning-icon>
+                            Crear Tarea
+                        </button>
+                    </div>
+
+                    <c-modal title={modalTitle} is-open={isModalOpen} onclose={closeModal}>
+                        <lightning-record-edit-form  object-api-name="CatalogoTareas__c" record-id={selectedRecordId} onsuccess={handleSuccess}>
+                            <lightning-messages></lightning-messages>
+                            <div class="slds-grid slds-wrap slds-gutters_direct">
+                                <template for:each={formFieldsTareas} for:item="field">
+                                    <div key={field.apiName} class="slds-col slds-size_1-of-1 slds-p-bottom_small">
+                                        <lightning-input-field field-name={field.apiName} required={field.required}></lightning-input-field>
+                                    </div>
+                                </template>
+                            </div>
+                            <div class="custom-modal-footer">
+                                <button class="btn-custom-cancel" type="button" onclick={closeModal}>Cancelar</button>
+                                <button class="btn-assign" type="submit">Guardar</button>
+                            </div>
+                        </lightning-record-edit-form>
+                    </c-modal>
+
+                    <div class="table-responsive">
+                        <c-ctz-related-list elements={tareas} columns={columnsTareas} onrowaction={handleRowAction}></c-ctz-related-list>
+                    </div>
+                </div>
+            </template>
+
+            <template if:true={isRewardsTab}>
+                <div class="tab-content">
+                    <div class="content-header">
+                        <button class="btn-assign" onclick={handleNewIncentivo}>
+                            <lightning-icon icon-name="utility:add" size="x-small" variant="inverse" class="margin-right"></lightning-icon>
+                            Crear Incentivo
+                        </button>
+                    </div>
+
+                    <c-modal title={modalTitle} is-open={isModalOpen} onclose={closeModal}>
+                        <lightning-record-edit-form  object-api-name="CatalogoIncentivos__c" record-id={selectedRecordId} onsuccess={handleSuccess}>
+                            <lightning-messages></lightning-messages>
+                            <div class="slds-grid slds-wrap slds-gutters_direct">
+                                <template for:each={formFieldsIncentivos} for:item="field">
+                                    <div key={field.apiName} class="slds-col slds-size_1-of-1 slds-p-bottom_small">
+                                        <lightning-input-field field-name={field.apiName} required={field.required}></lightning-input-field>
+                                    </div>
+                                </template>
+                            </div>
+                            <div class="custom-modal-footer">
+                                <button class="btn-custom-cancel" type="button" onclick={closeModal}>Cancelar</button>
+                                <button class="btn-assign" type="submit">Guardar</button>
+                            </div>
+                        </lightning-record-edit-form>
+                    </c-modal>
+
+                    <div class="table-responsive">
+                        <c-ctz-related-list elements={incentivos} columns={columnsIncentivos} onrowaction={handleRowAction}></c-ctz-related-list>
+                    </div>
+                </div>
+            </template>
+            
+        </div>
+    </div>
+</template>

@@ -1,0 +1,71 @@
+<template>
+    <div class="store-container">
+        
+        <c-ctz-header 
+            title="Panel de Monitoreo Familiar" 
+            subtitle="Haga el seguimiento de las rutinas diarias de su hijo de forma sencilla.">
+        </c-ctz-header>
+        
+        <c-modal is-open={isPuntosModalOpen} title={puntosModalTitulo} onclose={closePuntosModal}>
+            <div class="slds-form">
+                
+                <div class="slds-form-element slds-m-bottom_medium">
+                    <lightning-input
+                        type="text"
+                        name="puntosMotivo"
+                        label="Motivo / Explicación"
+                        value={puntosMotivo}
+                        placeholder="Ej: Recoger la habitación sin protestar..."
+                        onchange={handlePuntosFormChange}
+                        required>
+                    </lightning-input>
+                </div>
+
+                <div class="slds-form-element slds-m-bottom_large">
+                    <lightning-input
+                        type="number"
+                        name="puntosCantidad"
+                        label="Cantidad de Puntos"
+                        value={puntosCantidad}
+                        min="1"
+                        onchange={handlePuntosFormChange}
+                        required>
+                    </lightning-input>
+                </div>
+
+                <div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-m-top_medium">
+                    <button class="btn-custom-cancel" onclick={closePuntosModal}>Cancelar</button>
+                    <button class="btn-assign" onclick={guardarMovimientoPuntos} disabled={isPuntosGuardarDisabled}>
+                        Confirmar
+                    </button>
+                </div>
+            </div>
+        </c-modal>
+
+        <div class="slds-m-top_medium">
+            <c-info-paciente paciente={pacienteData}>
+                
+                <div class="family-actions-wrapper">
+                    <template if:true={mostrarBotonRecompensas}>
+                        <button class="btn-family-action btn-family-action--reward" onclick={handleOpenRewardModal}>
+                            <lightning-icon icon-name="utility:add" size="x-small" class="icon-white slds-m-right_xx-small"></lightning-icon>
+                            Añadir recompensa
+                        </button>
+                    </template>
+                    <template if:true={mostrarBotonCastigos}>
+                        <button class="btn-family-action btn-family-action--punish" onclick={handleOpenPunishModal}>
+                            <lightning-icon icon-name="utility:dash" size="x-small" class="icon-dark slds-m-right_xx-small"></lightning-icon>
+                            Añadir Castigo
+                        </button>
+                    </template>
+                </div>
+
+            </c-info-paciente>
+        </div>
+
+        <div class="slds-m-top_large">
+            <c-kanban class="mi-tablero-kanban" paciente={pacienteData} onrefrescarpanel={refreshPanelData}></c-kanban>
+        </div>
+
+    </div>
+</template>

@@ -1,0 +1,187 @@
+:root {
+    --color-primary-900: #0A2E31; /* El más oscuro */
+    --color-primary-800: #135258;
+    --color-primary-700: #1D7981;
+    --color-primary-600: #269DA8;
+    --color-primary-500: #45B8C4; /* COLOR BASE PRINCIPAL */
+    --color-primary-400: #6BD2DC;
+    --color-primary-300: #91E4EB;
+    --color-primary-200: #B7F3F8;
+    --color-primary-100: #DFFBFE;
+    --color-primary-50:  #F0FEFF; /* El más claro */
+
+    --color-secondary-900: #4A3A00;
+    --color-secondary-800: #806500;
+    --color-secondary-700: #B38E00;
+    --color-secondary-600: #E6B800;
+    --color-secondary-500: #FFD553; /* COLOR BASE SECUNDARIO */
+    --color-secondary-400: #FFDF7A;
+    --color-secondary-300: #FFE8A3;
+    --color-secondary-200: #FFF2CC;  /* COLOR MODALES*/
+    --color-secondary-100: #FFF9E5; /* COLOR CARDS */
+    --color-secondary-50:  #FFFDF5;
+ 
+    --color-tertiary-900: #4A0D0D;
+    --color-tertiary-800: #7A1515;
+    --color-tertiary-700: #AA1C1C;
+    --color-tertiary-600: #D93636;
+    --color-tertiary-500: #EE6767; /* COLOR BASE TERCIARIO */
+    --color-tertiary-400: #F28787;
+    --color-tertiary-300: #F6A8A8;
+    --color-tertiary-200: #F9C9C9;
+    --color-tertiary-100: #FDEAEA;
+    --color-tertiary-50:  #FEF4F4;
+
+    --color-neutral-900: #1A1A1A; /* Textos principales */
+    --color-neutral-800: #333333; /* Textos secundarios */
+    --color-neutral-700: #4D4D4D;
+    --color-neutral-600: #666666;
+    --color-neutral-500: #808080;
+    --color-neutral-400: #B3B3B3;
+    --color-neutral-300: #CCCCCC; /* Bordes */
+    --color-neutral-200: #E6E6E6; /* Fondos de tarjetas */
+    --color-neutral-100: #F0F0F0; /* FONDO BASE DE LA APP */
+    --color-neutral-50:  #F8F8F8;
+    --color-white:       #FFFFFF; /* Blanco puro */
+    --color-black:       #000000; /* Negro puro */
+
+    --font-headline: 'Poppins', sans-serif;
+    --font-body: 'Nunito Sans', sans-serif;
+    --font-label: 'Nunito Sans', sans-serif;
+
+
+    --font-size-h1: 2.5rem;    /* 40px - Títulos de página o Marcadores de puntos */
+    --font-size-h2: 2rem;      /* 32px - Títulos de secciones grandes */
+    --font-size-h3: 1.5rem;    /* 24px - Títulos de tarjetas o modales */
+    --font-size-h4: 1.25rem;   /* 20px - Subtítulos destacados */
+    
+    --font-size-body-lg: 1.125rem; /* 18px - Textos de lectura importantes */
+    --font-size-body-md: 1rem;     /* 16px - Texto base por defecto */
+    --font-size-label: 0.875rem;   /* 14px - Etiquetas, botones secundarios, inputs */
+    --font-size-label-sm: 0.75rem; /* 12px - Notas al pie, tags, metadatos pequeños */
+    
+    --font-weight-regular: 400;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    --radius-sm: 4px;
+    --radius-md: 8px;          /* Para tarjetas secundarias y botones cuadrados */
+    --radius-lg: 16px;         /* Para tarjetas principales */
+    --radius-pill: 50px;       /* Para botones redondeados y badges */
+
+    --spacing-xs: 0.25rem;     /* 4px */
+    --spacing-sm: 0.5rem;      /* 8px */
+    --spacing-md: 1rem;        /* 16px */
+    --spacing-lg: 1.5rem;      /* 24px */
+    --spacing-xl: 2rem;        /* 32px */
+
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 12px 24px rgba(69, 184, 196, 0.15);
+
+    --transition-speed: 0.3s;
+    --transition-ease: ease-in-out;
+}
+
+    .custom-modal-footer {
+        background-color: #f3f4f6;
+        margin: 2rem -1rem -1rem -1rem;
+        padding: 1.25rem;
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem;
+        border-radius: 0 0 12px 12px;
+    }
+
+    /* Botón rojo (Cancelar) */
+    .btn-custom-cancel {
+        background-color: var(--color-tertiary-200);
+        border: 1px solid var(--color-tertiary-300, #cbd5e1);
+        border-radius: var(--radius-md, 8px);
+        padding: var(--spacing-sm, 8px) var(--spacing-lg, 20px);
+        font-family: var(--font-label);
+        font-weight: var(--font-weight-bold, 700);
+        font-size: var(--font-size-label); /* Añadido para unificar */
+        color: var(--color-neutral-700, #4b5563);
+        display: inline-flex; /* Añadido para unificar */
+        align-items: center;  /* Añadido para unificar */
+        justify-content: center; /* Añadido para unificar */
+        cursor: pointer;
+        transition: background-color var(--transition-speed, 0.2s);
+    }
+
+    .btn-custom-cancel:hover {
+        background-color: var(--color-tertiary-400, #f3f4f6);
+    }
+
+    /* Botón amarillo (Guardar y nuevo) */
+    .btn-custom-save-new {
+        background-color: var(--color-secondary-400, #facc15);
+        color: var(--color-neutral-900, #1f2937);
+        border: 1px solid transparent;
+        padding: var(--spacing-sm, 8px) var(--spacing-lg, 20px);
+        border-radius: var(--radius-md, 8px);
+        font-family: var(--font-label);
+        font-weight: var(--font-weight-bold, 700);
+        font-size: var(--font-size-label);
+        display: inline-flex;
+        align-items: center; 
+        justify-content: center;
+        cursor: pointer;
+        transition: opacity var(--transition-speed, 0.2s);
+    }
+
+    .btn-custom-save-new:hover {
+        opacity: 0.9;
+    }
+
+    /* Botón azul (Primario) */
+    .btn-assign {
+        background-color: var(--color-primary-500);
+        color: var(--color-white);
+        border: 1px solid transparent;
+        padding: var(--spacing-sm, 8px) var(--spacing-lg, 20px);
+        border-radius: var(--radius-md, 8px);
+        font-family: var(--font-label);
+        font-weight: var(--font-weight-bold, 700);
+        font-size: var(--font-size-label);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color var(--transition-speed, 0.2s);
+    }
+
+    .btn-assign:hover {
+        background-color: var(--color-primary-700);
+    }
+
+    /* Botón blanco (Secundario) */
+    .btn-custom-white {
+        background-color: var(--color-white, #FFFFFF);
+        color: var(--color-primary-600, #269DA8);
+        border: 1px solid var(--color-primary-200, #B7F3F8);
+        padding: var(--spacing-sm, 8px) var(--spacing-lg, 20px);
+        border-radius: var(--radius-md, 8px);
+        font-family: var(--font-label);
+        font-weight: var(--font-weight-bold, 700);
+        font-size: var(--font-size-label);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color var(--transition-speed, 0.2s);
+}
+
+.btn-custom-white:hover {
+    background-color: var(--color-primary-50, #F0FEFF);
+}
+
+.btn-custom-save-new:disabled, 
+.btn-assign:disabled,
+.btn-custom-white:disabled {
+    background-color: var(--color-neutral-200, #e5e7eb) !important;
+    color: var(--color-neutral-400, #9ca3af) !important;
+    border-color: transparent !important;
+    cursor: not-allowed;
+}

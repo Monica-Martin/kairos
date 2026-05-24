@@ -1,0 +1,17 @@
+<template>
+    <div class="search-container slds-grid slds-gutters slds-grid_vertical-align-center">
+        
+        <div class="slds-col input-main">
+            <lightning-input type="search" placeholder={placeholder} variant="label-hidden" onchange={handleNameChange}></lightning-input>
+        </div>
+
+        <template lwc:if={showStatusFilter}>
+            <div class="slds-col input-extra">
+                <lightning-combobox placeholder={statusPlaceholder} variant="label-hidden" value={statusFilterValue} options={statusOptions} onchange={handleStatusChange}></lightning-combobox>
+            </div>
+            <div class="slds-col button-col">
+                <button class="btn-neutral" onclick={reset}>Limpiar filtros</button> 
+            </div>
+        </template>
+    </div>
+</template>

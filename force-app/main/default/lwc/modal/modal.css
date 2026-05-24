@@ -1,0 +1,28 @@
+.custom-modal-scope .custom-container {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.custom-modal-scope .custom-header {
+    background-color: var(--color-secondary-200);
+    border-bottom: none;
+    padding: 1.5rem;
+    text-align: left;
+}
+
+.custom-modal-scope .font-header {
+    color: #2b7a78;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.custom-modal-scope .custom-close {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    color: #6b7280;
+}
+
+.custom-modal-scope .custom-content {
+    background-color: #fefdf0; 
+}

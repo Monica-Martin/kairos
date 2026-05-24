@@ -1,0 +1,148 @@
+<template>
+    <div class="landing-container">
+        <section class="hero">
+            <div class="hero__content">
+                <div class="badge badge--neutral">
+                    <lightning-icon icon-name="utility:sparkles" size="xx-small" class="icon-badge"></lightning-icon>
+                    <span>Kairós App</span>
+                </div>
+                <h1 class="hero__title">
+                    Conecta la <span class="text-primary">clínica</span> con <br/>
+                    el <span class="text-secondary">hogar</span> en tiempo real
+                </h1>
+                <p class="hero__description">
+                    La primera plataforma integral que une la gestión clínica con una experiencia de rutinas y gamificación móvil para las familias, potenciando la motivación y el seguimiento terapéutico.
+                </p>
+                <div class="hero__social-proof">
+                    <div class="avatars">
+                        <div class="avatar avatar-1"></div>
+                        <div class="avatar avatar-2"></div>
+                    </div>
+                    <span class="social-proof-text">Certified Clinical Tech Partner</span>
+                </div>
+            </div>
+            
+            <div class="hero__visual">
+                <div class="image-placeholder">
+                    <div class="floating-badge">
+                        <div class="icon-coin-wrapper">
+                            <lightning-icon icon-name="utility:favorite" size="small" variant="warning"></lightning-icon>
+                        </div>
+                        <div class="floating-badge__text">
+                            <small>Puntos Ganados</small>
+                            <strong>+ 1240</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="features__header">
+                <h2>Doble Enfoque, Un Solo Objetivo</h2>
+                <p>Nuestra arquitectura aborda la complejidad clínica y la simplicidad familiar, asegurando el éxito terapéutico en ambos frentes.</p>
+            </div>
+
+            <div class="features__grid">
+                <div class="feature-column feature-column--primary">
+                    <h3 class="column-title">
+                        <lightning-icon icon-name="utility:search" size="small" class="icon-primary"></lightning-icon> 
+                        Gestión Clínica
+                    </h3>
+                    
+                    <div class="feature-card">
+                        <div class="feature-card__icon bg-primary-light">
+                            <lightning-icon icon-name="utility:metrics" size="small"></lightning-icon>
+                        </div>
+                        <h4>Dashboard Unificado</h4>
+                        <p>Visualiza el progreso de todos tus pacientes, citas pendientes y alertas de comportamiento en una sola pantalla súper optimizada.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-card__icon bg-primary-light">
+                            <lightning-icon icon-name="utility:page" size="small"></lightning-icon>
+                        </div>
+                        <h4>Informes Automatizados</h4>
+                        <p>Generación de reportes PDF profesionales con un clic, cruzando datos de asistencia y evolución de la economía de fichas.</p>
+                    </div>
+                </div>
+
+                <div class="feature-column feature-column--secondary">
+                    <h3 class="column-title">
+                        <lightning-icon icon-name="utility:favorite" size="small" class="icon-secondary"></lightning-icon> 
+                        Experiencia Familias
+                    </h3>
+                    
+                    <div class="feature-card">
+                        <div class="feature-card__icon bg-secondary-light">
+                            <lightning-icon icon-name="utility:cart" size="small"></lightning-icon>
+                        </div>
+                        <h4>Tienda de Recompensas Móvil</h4>
+                        <p>Un sistema gamificado donde los pacientes pueden canjear sus fichas por incentivos preconfigurados por el terapeuta.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-card__icon bg-secondary-light">
+                            <lightning-icon icon-name="utility:event" size="small"></lightning-icon>
+                        </div>
+                        <h4>Seguimiento Rutinas</h4>
+                        <p>Interfaz visual e intuitiva para que los padres registren comportamientos diarios y validen las tareas completadas en casa.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pricing">
+            <div class="pricing__header">
+                <h2>Planes para tu Centro</h2>
+                <p>Escalabilidad transparente diseñada para crecer contigo.</p>
+            </div>
+
+            <div class="pricing__cards">
+                <div class="price-card">
+                    <h3>Inicio</h3>
+                    <p class="plan-desc">Para profesionales independientes.</p>
+                    <div class="price">
+                        <span class="currency">€</span><span class="amount">29</span><span class="period">/mes</span>
+                    </div>
+                    <ul class="features-list">
+                        <li><lightning-icon icon-name="utility:check" size="xx-small" class="icon-check"></lightning-icon> Hasta 10 pacientes</li>
+                        <li><lightning-icon icon-name="utility:check" size="xx-small" class="icon-check"></lightning-icon> App Familia Básica</li>
+                        <li><lightning-icon icon-name="utility:check" size="xx-small" class="icon-check"></lightning-icon> Soporte por email</li>
+                    </ul>
+                    <button class="btn btn--light">Comenzar Gratis</button>
+                </div>
+
+                <div class="price-card price-card--featured">
+                    <div class="badge-featured">Más Popular</div>
+                    <h3>Centro</h3>
+                    <p class="plan-desc">Para clínicas en crecimiento.</p>
+                    <div class="price">
+                        <span class="currency">€</span><span class="amount">79</span><span class="period">/mes</span>
+                    </div>
+                    <ul class="features-list">
+                        <li><lightning-icon icon-name="utility:check" size="xx-small" class="icon-check-primary"></lightning-icon> Pacientes Ilimitados</li>
+                        <li><lightning-icon icon-name="utility:check" size="xx-small" class="icon-check-primary"></lightning-icon> App Familia Premium (Tienda)</li>
+                        <li><lightning-icon icon-name="utility:check" size="xx-small" class="icon-check-primary"></lightning-icon> Informes PDF Automatizados</li>
+                        <li><lightning-icon icon-name="utility:check" size="xx-small" class="icon-check-primary"></lightning-icon> Soporte Prioritario</li>
+                    </ul>
+                    <button class="btn btn--primary">Seleccionar Plan</button>
+                </div>
+
+                <div class="price-card">
+                    <h3>Premium</h3>
+                    <p class="plan-desc">Solución completa marca blanca.</p>
+                    <div class="price">
+                        <span class="amount text-md">Personalizado</span>
+                    </div>
+                    <ul class="features-list">
+                        <li><lightning-icon icon-name="utility:check" size="xx-small" class="icon-check"></lightning-icon> Marca Blanca (Logo Propio)</li>
+                        <li><lightning-icon icon-name="utility:check" size="xx-small" class="icon-check"></lightning-icon> Integración API externa</li>
+                        <li><lightning-icon icon-name="utility:check" size="xx-small" class="icon-check"></lightning-icon> Gestor de Cuentas Dedicado</li>
+                    </ul>
+                    <button class="btn btn--light">Contactar Ventas</button>
+                </div>
+            </div>
+        </section>
+    </div>
+</template>

@@ -1,0 +1,295 @@
+<template>
+    <c-ctz-header title="Detalles del paciente" subtitle="Gestiona las tareas del paciente y los permisos de sus tutores"></c-ctz-header>
+    <c-info-paciente paciente={paciente}>
+        <div class="patient-actions-wrapper">
+            
+            <button class="btn-assign slds-m-bottom_x-small" onclick={handleGeneratePDF}>
+                <lightning-icon icon-name="utility:file" size="small" variant="inverse" class="slds-m-right_small"></lightning-icon>
+                Crear PDF
+            </button>
+
+            <button class="btn-custom-white" onclick={handleViewHistory}>
+                Ver Historial
+            </button>
+
+        </div>
+    </c-info-paciente>
+
+    <!-- MODAL HISTORIAL -->
+     <c-modal is-open={isHistoryModalOpen} title="Historial de Puntos (Mes Actual)" onclose={closeHistoryModal}>
+        
+        <div class="slds-p-around_medium">
+            
+            <div class="history-table-container">
+                
+                <template if:true={historialData.length}>
+                    <lightning-datatable
+                        key-field="Id"
+                        data={historialData}
+                        columns={historialColumns}
+                        hide-checkbox-column>
+                    </lightning-datatable>
+                </template>
+
+                <template if:false={historialData.length}>
+                    <div class="slds-p-around_xlarge slds-text-align_center">
+                        <lightning-icon icon-name="utility:info_alt" size="medium" class="slds-m-bottom_small icon-calendar"></lightning-icon>
+                        
+                        <p class="slds-text-color_weak slds-text-title_bold history-empty-text">
+                            No se registran movimientos de puntos durante este mes.
+                        </p>
+                    </div>
+                </template>
+
+            </div>
+
+            <div class="slds-grid slds-grid_align-end slds-m-top_medium">
+                <button class="btn-custom-cancel" onclick={closeHistoryModal}>Cerrar Historial</button>
+            </div>
+            
+        </div>
+
+    </c-modal>
+
+    <!-- TABS -->
+    <div class="workspace-container">
+        <div class="workspace-card">
+            
+            <div class="tabs-nav">
+                <button class={kanbanTabClass} onclick={handleTabChange} data-tab="kanban">
+                    <lightning-icon icon-name="utility:kanban" size="x-small" class="tab-icon"></lightning-icon>
+                    Kanban Semanal
+                </button>
+                <button class={assignTabClass} onclick={handleTabChange} data-tab="assign">
+                    <lightning-icon icon-name="utility:assignment" size="x-small" class="tab-icon"></lightning-icon>
+                    Asignación Masiva
+                </button>
+                <button class={permsTabClass} onclick={handleTabChange} data-tab="perms">
+                    <lightning-icon icon-name="utility:identity" size="x-small" class="tab-icon"></lightning-icon>
+                    Contactos y Permisos
+                </button>
+            </div>
+
+            <template if:true={isKanbanTab}>
+                <c-kanban paciente={paciente}></c-kanban>
+            </template>
+
+            <template if:true={isAssignTab}>
+                <div class="tab-content">
+                    <div class="table-responsive">
+                        <template if:true={isLoading}>
+                            <lightning-spinner alternative-text="Cargando catálogo..." size="small"></lightning-spinner>
+                        </template>
+
+                        <table class="workspace-table" if:false={isLoading}>
+                            <thead>
+                                <tr>
+                                    <th>TAREA GLOBAL (BIBLIOTECA)</th>
+                                    <th>PUNTOS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                <template for:each={catalogoMasivo} for:item="fila">
+                                    <tr key={fila.globalId}>
+                                        
+                                        <td class={fila.rowClass}>
+                                            <lightning-icon icon-name={fila.iconName} size="small" class={fila.iconClass}></lightning-icon>
+                                            <span class="slds-m-left_small">
+                                                {fila.nombre} 
+                                                <template if:false={fila.isActive}> (Sin asignar)</template>
+                                            </span>
+                                        </td>
+                                        
+                                        <td>
+                                            <div class="input-pts-wrapper">
+                                                <input 
+                                                    type="number" 
+                                                    class={fila.ptsClass} 
+                                                    value={fila.puntos} 
+                                                    data-id={fila.globalId}
+                                                    disabled={fila.isInputDisabled}
+                                                    onchange={handlePuntosChange} 
+                                                /> 
+                                                <span class="pts-lbl margin-right">pts</span>
+                                                
+                                                <a href="#" class={fila.accionClass} data-id={fila.globalId} onclick={handleToggleFila}>
+                                                    {fila.accionLabel}
+                                                </a>
+                                            </div>
+                                        </td>
+                                        
+                                    </tr>
+                                </template>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="footer-actions slds-m-top_medium slds-text-align_right">
+                        <button class="btn-custom-save-new" onclick={handleSaveCatalog} disabled={isSavingCatalog}>
+                            <lightning-icon icon-name="utility:save" size="x-small" variant="inverse" class="margin-right"></lightning-icon>
+                            Guardar Catálogo
+                        </button>
+                    </div>
+                </div>
+            </template>
+
+            <template if:true={isPermsTab}>
+                <div class="tab-content">
+                    
+                    <div class="permissions-grid">
+                        
+                        <div class="perms-column">
+                            <div class="column-header-flex">
+                                <h3>Familiares Vinculados</h3>
+                                <a href="#" class="action-link" onclick={handleOpenVincularModal}>
+                                    <lightning-icon icon-name="utility:add_user" size="xx-small" class="icon-link-addon"></lightning-icon>
+                                    Vincular Nuevo
+                                </a>
+                            </div>
+                            <template if:true={hayFamiliaresVinculados}>
+                                <template for:each={familiaresVinculados} for:item="familiar">
+                                    
+                                    <div key={familiar.id} class="family-member-card">
+                                        <div class="member-avatar">
+                                            <lightning-icon icon-name="utility:user" size="small" class="icon-neutral"></lightning-icon>
+                                        </div>
+                                        <div class="member-details">
+                                            <strong>{familiar.nombre} <span class="relationship">({familiar.relacion})</span></strong>
+                                            <span>{familiar.email}</span>
+                                            
+                                            <template if:true={familiar.hasAccess}>
+                                                <span class="tag-status">Acceso Portal <span class="indicator-dot"></span></span>
+                                            </template>
+                                        </div>
+                                    </div>
+
+                                </template>
+                            </template>
+
+                            <template if:false={hayFamiliaresVinculados}>
+                                <div class="slds-m-top_medium slds-p-around_medium slds-text-align_center" style="background: #f8f9fa; border-radius: 8px;">
+                                    <lightning-icon icon-name="utility:groups" size="medium" class="icon-muted slds-m-bottom_small"></lightning-icon>
+                                    <p class="slds-text-color_weak">No hay familiares vinculados a este paciente.</p>
+                                </div>
+                            </template>
+                        </div>
+
+                        <div class="perms-column border-left">
+                            <h3><lightning-icon icon-name="utility:settings" size="x-small" class="icon-neutral margin-right"></lightning-icon> Interruptores de Permisos</h3>
+
+                            <div class="toggle-box">
+                                <div class="toggle-text">
+                                    <strong>Creación de tareas</strong>
+                                    <p>Los padres pueden asignar tareas al paciente.</p>
+                                </div>
+                                <lightning-input 
+                                    type="toggle" 
+                                    message-toggle-active="Activo" 
+                                    message-toggle-inactive="Inactivo" 
+                                    checked={permisoTareas}
+                                    data-field="PermisoCreacionTareas__c"
+                                    onchange={handleTogglePermiso}>
+                                </lightning-input>
+                            </div>
+
+                            <div class="toggle-box">
+                                <div class="toggle-text">
+                                    <strong>Creación de recompensas</strong>
+                                    <p>Los padres pueden sumar puntos y crear recompensas.</p>
+                                </div>
+                                <lightning-input 
+                                    type="toggle" 
+                                    message-toggle-active="Activo" 
+                                    message-toggle-inactive="Inactivo" 
+                                    checked={permisoRecompensas}
+                                    data-field="PermisoCreacionRecompensas__c"
+                                    onchange={handleTogglePermiso}>
+                                </lightning-input>
+                            </div>
+
+                            <div class="toggle-box">
+                                <div class="toggle-text">
+                                    <strong>Creación de castigos</strong>
+                                    <p>Los padres pueden restar puntos y crear castigos.</p>
+                                </div>
+                                <lightning-input 
+                                    type="toggle" 
+                                    message-toggle-active="Activo" 
+                                    message-toggle-inactive="Inactivo"
+                                    checked={permisoCastigos}
+                                    data-field="PermisoCreacionCastigos__c"
+                                    onchange={handleTogglePermiso}>
+                                </lightning-input>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </template>
+
+            <!-- MODAL CREAR CONTACTO -->
+            <c-modal is-open={isVincularModalOpen} title="Vincular Nuevo Familiar" onclose={closeVincularModal}>
+                <div class="slds-form slds-p-around_medium">
+                    
+                    <div class="slds-grid slds-gutters slds-m-bottom_medium">
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-input 
+                                type="text" 
+                                label="Nombre" 
+                                name="nombre" 
+                                value={nuevoFamiliar.nombre} 
+                                required 
+                                onchange={handleFamiliarChange}>
+                            </lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-input 
+                                type="text" 
+                                label="Apellidos" 
+                                name="apellidos" 
+                                value={nuevoFamiliar.apellidos} 
+                                required 
+                                onchange={handleFamiliarChange}>
+                            </lightning-input>
+                        </div>
+                    </div>
+
+                    <div class="slds-grid slds-gutters slds-m-bottom_large">
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-input 
+                                type="email" 
+                                label="Correo Electrónico" 
+                                name="email" 
+                                value={nuevoFamiliar.email} 
+                                required 
+                                onchange={handleFamiliarChange}>
+                            </lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-combobox 
+                                label="Rol Familiar" 
+                                name="tipo" 
+                                value={nuevoFamiliar.tipo} 
+                                options={tipoFamiliarOptions} 
+                                required 
+                                onchange={handleFamiliarChange}>
+                            </lightning-combobox>
+                        </div>
+                    </div>
+
+                    <div class="slds-grid slds-grid_align-end slds-m-top_large">
+                        <button class="btn-custom-cancel slds-m-right_small" onclick={closeVincularModal}>
+                            Cancelar
+                        </button>
+                        <button class="btn-assign" onclick={handleGuardarFamiliar}>
+                            <lightning-icon icon-name="utility:send" size="x-small" variant="inverse" class="slds-m-right_x-small"></lightning-icon>
+                            Vincular y Crear Acceso
+                        </button>
+                    </div>
+                </div>
+            </c-modal>
+        </div>
+    </div>
+</template>

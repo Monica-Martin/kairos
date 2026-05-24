@@ -1,0 +1,150 @@
+.kanban-wrapper {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.kanban-header {
+    background-color: var(--color-secondary-100, #fefdf0);
+    border: 1px solid var(--color-neutral-200);
+    padding: var(--spacing-md) var(--spacing-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.week-display {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.icon-calendar {
+    --sds-c-icon-color-foreground-default: var(--color-tertiary-500);
+}
+
+.week-title {
+    font-family: var(--font-headline);
+    font-size: var(--font-size-h3);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary-800);
+    margin: 0;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.nav-buttons {
+    display: flex;
+    gap: var(--spacing-xs);
+}
+
+.btn-nav {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-neutral-300);
+    border-radius: var(--radius-md);
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+}
+
+.btn-nav:hover {
+    background-color: var(--color-neutral-100);
+}
+
+.margin-right {
+    margin-right: var(--spacing-xs);
+}
+
+.kanban-board {
+    background-color: var(--color-neutral-50, #f3f4f6);
+    border: 1px solid var(--color-neutral-200);
+    border-top: none;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    padding: var(--spacing-lg);
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: var(--spacing-md);
+    align-items: start;
+}
+
+.kanban-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    min-height: 400px;
+}
+
+.column-title {
+    font-size: var(--font-size-label);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-neutral-700);
+    text-align: center;
+    margin: 0;
+    padding-bottom: var(--spacing-xs);
+    border-bottom: 2px solid transparent;
+}
+
+.column-title--active {
+    color: var(--color-secondary-700);
+    border-bottom-color: var(--color-secondary-500);
+}
+
+.column-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    min-height: 100%;
+}
+
+.task-detail-title {
+    font-family: var(--font-headline);
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--color-primary-900);
+}
+
+.label-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-neutral-500);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.description-text {
+    font-size: 1rem;
+    color: var(--color-neutral-700);
+    line-height: 1.5;
+}
+
+.value-text {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--color-neutral-800);
+}
+
+.points-value {
+    color: var(--color-primary-500);
+}
+
+.modal-badge {
+    display: inline-block;
+    padding: 4px 16px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.badge-higiene { background: var(--color-primary-300); color: var(--color-primary-700); }
+.badge-estudios { background: var(--color-secondary-300); color: var(--color-secondary-700); }
+.badge-comportamiento { background: var(--color-tertiary-300); color: var(--color-tertiary-700); }
+.badge-autonomia { background: #daffb0; color: #43853d; }
+.badge-otros { background: #f5f5f5; color: #616161; }

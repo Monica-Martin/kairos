@@ -1,0 +1,101 @@
+.mini-card {
+    background-color: var(--color-white, #ffffff);
+    border: 1px solid var(--color-neutral-200, #e5e7eb);
+    border-top: 3px solid #38b2ac;
+    border-radius: var(--radius-md, 8px);
+    padding: var(--spacing-sm, 12px);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs, 8px);
+    box-shadow: var(--shadow-sm, 0 1px 2px rgba(0,0,0,0.05));
+    cursor: pointer;
+    transition: transform var(--transition-speed, 0.2s), box-shadow var(--transition-speed, 0.2s);
+}
+
+.mini-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md, 0 4px 6px rgba(0,0,0,0.1));
+}
+
+.mini-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-badge {
+    font-size: 0.7rem;
+    font-weight: var(--font-weight-bold, 700);
+    letter-spacing: 0.5px;
+    color: #2c7a7b;
+}
+
+.card-title {
+    font-size: var(--font-size-body-sm, 0.9rem);
+    font-weight: var(--font-weight-medium, 500);
+    color: var(--color-neutral-800, #1f2937);
+    margin: var(--spacing-xs, 4px) 0;
+    line-height: 1.3;
+}
+
+.mini-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-bold, 700);
+}
+
+.card-time {
+    color: var(--color-neutral-500, #6b7280);
+}
+
+.card-points {
+    color: #d97706; 
+}
+
+.mini-card--completed {
+    border-top: 3px solid var(--color-primary-400, #4fd1c5);
+    background-color: var(--color-neutral-100, #f3f4f6);    
+    opacity: 0.8;
+    cursor: default;
+}
+
+.mini-card--completed:hover {
+    transform: none;
+    box-shadow: var(--shadow-sm, 0 1px 2px rgba(0,0,0,0.05));
+}
+
+.badge--completed {
+    color: var(--color-primary-500, #38b2ac);
+}
+
+.points--completed {
+    color: var(--color-primary-500, #38b2ac);
+}
+
+
+/* Higiene */
+.task-card--higiene { border-top-color: var(--color-primary-400); }
+.badge--higiene { color: var(--color-primary-400); }
+.icon-higiene { --sds-c-icon-color-foreground-default: var(--color-primary-400); }
+
+/* Estudios */
+.task-card--estudios { border-top-color: var(--color-secondary-400); }
+.badge--estudios { color: var(--color-secondary-400); }
+.icon-estudios { --sds-c-icon-color-foreground-default: var(--color-secondary-400); }
+
+/* Comportamiento */
+.task-card--comportamiento { border-top-color: var(--color-tertiary-400); }
+.badge--comportamiento { color: var(--color-tertiary-400); }
+.icon-comportamiento { --sds-c-icon-color-foreground-default: var(--color-tertiary-400); }
+
+/* Autonomía */
+.task-card--autonomia { border-top-color: #ACF29F; }
+.badge--autonomia { color: #56a347; } 
+.icon-autonomia { --sds-c-icon-color-foreground-default: #ACF29F; }
+
+/* Otros */
+.task-card--otros { border-top-color: var(--color-neutral-300); }
+.badge--otros { color: var(--color-neutral-500); }
+.icon-otros { --sds-c-icon-color-foreground-default: var(--color-neutral-300); }

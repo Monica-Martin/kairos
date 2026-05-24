@@ -1,0 +1,104 @@
+.library-container {
+    padding: var(--spacing-lg);
+    min-height: 100vh;
+    font-family: var(--font-body);
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+.library-card {
+    background-color: var(--color-white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--color-neutral-200);
+    overflow: hidden;
+}
+
+
+.tabs-nav {
+    display: flex;
+    border-bottom: 2px solid var(--color-neutral-200);
+    background-color: var(--color-neutral-50);
+}
+
+.tab-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    background: transparent;
+    border: none;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    font-family: var(--font-headline);
+    font-size: var(--font-size-body-lg);
+    color: var(--color-neutral-600);
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+
+.tab-btn:hover {
+    background-color: var(--color-white);
+    color: var(--color-primary-500);
+}
+
+.tab-btn.active {
+    background-color: var(--color-white);
+    color: var(--color-primary-600);
+    font-weight: var(--font-weight-bold);
+    border-bottom-color: var(--color-primary-500);
+}
+
+.tab-icon {
+    --sds-c-icon-color-foreground-default: currentColor;
+}
+
+
+.tab-content {
+    padding: var(--spacing-xl);
+    background-color: var(--color-secondary-100);
+}
+
+.content-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.content-header h2 {
+    font-family: var(--font-headline);
+    font-size: var(--font-size-h3);
+    color: var(--color-neutral-900);
+    margin: 0;
+}
+
+.margin-right {
+    margin-right: 8px;
+}
+
+
+.category-pill {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    font-size: var(--font-size-label-sm);
+    font-weight: var(--font-weight-bold);
+}
+
+.pill-ocio {
+    background-color: var(--color-primary-100);
+    color: var(--color-primary-700);
+}
+
+.pill-social {
+    background-color: var(--color-secondary-100);
+    color: var(--color-secondary-800);
+}
+
+.pill-material {
+    background-color: var(--color-neutral-200);
+    color: var(--color-neutral-700);
+}

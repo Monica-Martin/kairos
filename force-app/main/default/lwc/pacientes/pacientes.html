@@ -1,0 +1,104 @@
+<template>
+    <div class="patients-container">
+        <c-ctz-header title="Lista de pacientes" subtitle="Gestiona todos tus pacientes">
+            <div class="header-actions">
+                <button class="btn-custom-white" onclick={handleCreatePDF}>Crear PDF</button>
+                <button class="btn-assign" onclick={handleOpenModal}>Nuevo Paciente</button>
+            </div>
+        </c-ctz-header>
+        <template lwc:if={isModalOpen}>
+            <c-modal title="Registrar Nuevo Paciente" onclose={closeModal} is-open={isModalOpen}>
+                <lightning-record-edit-form  object-api-name="Paciente__c" onsubmit={handleSubmit} onsuccess={handleSuccess}>
+            
+                    <lightning-messages></lightning-messages>
+                    
+                    <template for:each={fieldsForm} for:item="field">
+                        <div key={field.apiName} class="slds-p-bottom_small">
+                            <lightning-input-field 
+                                field-name={field.apiName} 
+                                required={field.required}>
+                            </lightning-input-field>
+                        </div>
+                    </template>
+
+                    <div class="custom-modal-footer">
+                        <button class="btn-custom-cancel" type="button" onclick={closeModal}>Cancelar</button>
+                        <button class="btn-assign" type="submit">Guardar</button>
+                    </div>
+
+                </lightning-record-edit-form>
+            </c-modal>
+        </template>
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-icon bg-primary-light">
+                    <lightning-icon icon-name="utility:groups" size="small" class="icon-primary"></lightning-icon>
+                </div>
+                <div class="kpi-info">
+                    <span class="kpi-label">Total Pacientes Activos</span>
+                    <span class="kpi-value">{allPacientes.length}</span>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-icon bg-secondary-light">
+                    <lightning-icon icon-name="utility:trending" size="small" class="icon-warning"></lightning-icon>
+                </div>
+                <div class="kpi-info">
+                    <span class="kpi-label">Promedio Puntos Totales</span>
+                    <span class="kpi-value">{promedioPuntos}</span>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-icon bg-tertiary-light">
+                    <lightning-icon icon-name="utility:warning" size="small" class="icon-danger"></lightning-icon>
+                </div>
+                <div class="kpi-info">
+                    <span class="kpi-label">Alertas Críticas</span>
+                    <span class="kpi-value">{alertasCriticas}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-card">
+            <div class="table-toolbar">
+                <div class="search-wrapper">
+                    <c-table-seacher table-data={allPacientes} field-name="Name" placeholder="Introduce nombre del paciente..." onfilterchange={handleFilter}>></c-table-seacher>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <c-ctz-related-list elements={pacientes} columns={columns} onrowaction={handleViewPatient}></c-ctz-related-list>
+            </div>
+
+            <template if:true={allPacientes.length}>
+                <div class="pagination-footer">
+                    <div class="pagination-info">
+                        {paginationText}
+                    </div>
+                    <div class="pagination-controls">
+                        <button class="page-btn" onclick={handlePrevious} disabled={isFirstPage}>
+                            <lightning-icon icon-name="utility:chevronleft" size="x-small"></lightning-icon>
+                        </button>
+                        
+                        <template for:each={pageNumbers} for:item="page">
+                            <button 
+                                key={page.num} 
+                                class={page.className} 
+                                data-page={page.num} 
+                                onclick={handleGoToPage}>
+                                {page.num}
+                            </button>
+                        </template>
+                        
+                        <button class="page-btn" onclick={handleNext} disabled={isLastPage}>
+                            <lightning-icon icon-name="utility:chevronright" size="x-small"></lightning-icon>
+                        </button>
+                    </div>
+                </div>
+            </template>
+
+        </div>
+    </div>
+</template>

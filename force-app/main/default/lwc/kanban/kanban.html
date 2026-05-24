@@ -1,0 +1,132 @@
+<template>
+    <div class="kanban-wrapper">
+
+        <div class="kanban-header">
+            <div class="week-display">
+                <lightning-icon icon-name="utility:date_input" size="medium" class="icon-calendar"></lightning-icon>
+                <h2 class="week-title">{textoSemanaActual}</h2>
+            </div>
+
+            <div class="header-actions">
+                <button class="btn-assign" onclick={handleAssignTask}>
+                    <lightning-icon icon-name="utility:add" size="x-small" variant="inverse" class="margin-right"></lightning-icon>
+                    Asignar Tarea
+                </button>
+
+                <div class="nav-buttons">
+                    <button class="btn-nav" onclick={handlePrevWeek}>
+                        <lightning-icon icon-name="utility:chevronleft" size="x-small"></lightning-icon>
+                    </button>
+
+                    <button class="btn-nav" onclick={handleNextWeek}>
+                        <lightning-icon icon-name="utility:chevronright" size="x-small"></lightning-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="kanban-board">
+
+            <template for:each={diasSemana} for:item="dia">
+                <div class="kanban-column" key={dia.nombre}>
+                    <h3 class={dia.claseTitulo}>{dia.nombre}</h3>
+
+                    <div class="column-body">
+                        <template for:each={dia.tareas} for:item="tarea">
+                            <c-mini-card key={tarea.id} is-terapeuta={isTerapeuta} tarea={tarea} oncompletartarea={handleCompletarTarea} onabrirdetalles={handleAbrirDetalles}>
+                            </c-mini-card>
+                        </template>
+                    </div>
+                </div>
+            </template>
+
+            <c-modal is-open={isDetalleModalOpen} title="Detalles de la Tarea" onclose={cerrarDetalleModal}>
+                <template if:true={tareaSeleccionada}>
+                    <div class="slds-grid slds-wrap">
+                        
+                        <div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+                            <span class={tareaSeleccionada.claseBadgeModal}>{tareaSeleccionada.tipo}</span>
+                        </div>
+
+                        <div class="slds-col slds-size_1-of-1 slds-m-bottom_large">
+                            <h3 class="task-detail-title">{tareaSeleccionada.titulo}</h3>
+                            <div class="description-section slds-m-top_medium">
+                                <p class="label-title">DESCRIPCIÓN / INSTRUCCIONES</p>
+                                <p class="description-text">{tareaSeleccionada.descripcion}</p>
+                            </div>
+                        </div>
+
+                        <div class="slds-col slds-size_1-of-2">
+                            <p class="label-title">HORA PLANIFICADA</p>
+                            <div class="slds-grid slds-grid_vertical-align-center">
+                                <lightning-icon icon-name="utility:clock" size="x-small" class="slds-m-right_xx-small icon-gray"></lightning-icon>
+                                <span class="value-text">{tareaSeleccionada.hora}</span>
+                            </div>
+                        </div>
+
+                        <div class="slds-col slds-size_1-of-2">
+                            <p class="label-title">PUNTOS</p>
+                            <span class="value-text points-value">{tareaSeleccionada.puntosFormateados}</span>
+                        </div>
+
+                    </div>
+                </template>
+            </c-modal>
+
+            <c-modal is-open={isAsignarModalOpen} title="Asignar Nueva Tarea" onclose={closeAssignModal}>
+                <div class="slds-form">
+                    
+                    <div class="slds-form-element slds-m-bottom_medium">
+                        <lightning-combobox
+                            name="tareaSeleccionada"
+                            label="Selecciona la Tarea"
+                            value={nuevaTareaId}
+                            placeholder="Elige una tarea personalizada..."
+                            options={catalogoOptions}
+                            onchange={handleFormChange}
+                            required>
+                        </lightning-combobox>
+                    </div>
+
+                    <div class="slds-grid slds-gutters">
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-input
+                                type="datetime"
+                                name="fechaPlanificada"
+                                label="Fecha y Hora Planificada"
+                                value={nuevaFechaPlanificada}
+                                onchange={handleFormChange}
+                                required>
+                            </lightning-input>
+                        </div>
+
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-input
+                                type="datetime"
+                                name="fechaLimite"
+                                label="Fecha y Hora Límite"
+                                value={nuevaFechaLimite}
+                                onchange={handleFormChange}
+                                required>
+                            </lightning-input>
+                        </div>
+                    </div>
+
+                    <div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-m-top_large">
+                        <button class="btn-custom-cancel" onclick={closeAssignModal}>Cancelar</button>
+                        <div>
+                            <button class="btn-custom-save-new slds-m-right_small" onclick={handleSaveNew} disabled={isGuardarDisabled}>
+                                Guardar y añadir otra
+                            </button>
+                            <button class="btn-assign" style="display: inline-flex;" onclick={handlSaveExit} disabled={isGuardarDisabled}>
+                                Guardar
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </c-modal>
+
+        </div>
+    </div>
+</template>

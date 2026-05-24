@@ -1,0 +1,43 @@
+.family-actions-wrapper {
+    display: flex;
+    gap: var(--spacing-sm, 12px);
+}
+
+.btn-family-action {
+    border: none;
+    padding: var(--spacing-sm, 10px) var(--spacing-lg, 20px);
+    border-radius: var(--radius-md, 8px);
+    font-family: var(--font-label);
+    font-weight: var(--font-weight-bold, 700);
+    font-size: var(--font-size-label, 0.9rem);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color var(--transition-speed, 0.2s);
+}
+
+.btn-family-action--reward {
+    background-color: var(--color-primary-500); 
+    color: var(--color-white);
+}
+
+.btn-family-action--reward:hover {
+    background-color: var(--color-primary-200);
+}
+
+.btn-family-action--punish {
+    background-color: var(--color-tertiary-500);
+    color: var(--color-white);
+}
+
+.btn-family-action--punish:hover {
+    background-color: var(--color-tertiary-200);
+}
+
+.icon-white {
+    --sds-c-icon-color-foreground-default: var(--color-primary-800);
+}
+
+.icon-dark {
+    --sds-c-icon-color-foreground-default: var(--color-tertiary-800);
+}

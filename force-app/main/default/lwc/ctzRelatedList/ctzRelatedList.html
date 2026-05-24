@@ -1,0 +1,17 @@
+<template>
+    <lightning-card title={title}>
+
+        <div class="slds-p-horizontal_medium">
+            <template if:true={elements}>
+                <lightning-datatable key-field="Id" data={elements} columns={columns} onrowaction={handleInternalRowAction} hide-checkbox-column>
+                </lightning-datatable>
+            </template>
+
+            <template if:true={elements}>
+                <template if:false={elements.length}>
+                    <p class="slds-m-top_small slds-text-color_weak">No hay registros.</p>
+                </template>
+            </template>
+        </div>
+    </lightning-card>
+</template>

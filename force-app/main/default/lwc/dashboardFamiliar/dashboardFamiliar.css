@@ -1,0 +1,355 @@
+.routine-container {
+    padding: var(--spacing-lg);
+    min-height: 100vh;
+    font-family: var(--font-body);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.routine-header {
+    margin-bottom: var(--spacing-sm);
+}
+
+.routine-header h1 {
+    font-family: var(--font-headline);
+    font-size: var(--font-size-h2);
+    color: var(--color-neutral-900);
+    margin: 0;
+}
+
+.current-date {
+    color: var(--color-neutral-500);
+    font-size: var(--font-size-label);
+    text-transform: capitalize;
+}
+
+/* =========================================
+   CONTENEDOR Y GRID
+   ========================================= */
+/* ... tus otras clases routine-container, routine-header, etc. se quedan igual ... */
+
+.routine-grid {
+    display: grid;
+    /* Invertimos los anchos: Primero los 340px (Sidebar), luego el 1fr (Main) */
+    grid-template-columns: 340px 1fr; 
+    gap: var(--spacing-xl);
+    align-items: start;
+}
+
+/* Forzamos visualmente a la columna principal a ir a la derecha (posición 2) */
+.main-column {
+    order: 2;
+}
+
+/* Forzamos visualmente al sidebar a ir a la izquierda (posición 1) */
+.side-column {
+    order: 1;
+}
+
+/* =========================================
+   COLUMNA IZQUIERDA: TAREAS
+   ========================================= */
+.tasks-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.task-card {
+    background-color: var(--color-white);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: center;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-neutral-200);
+    transition: transform var(--transition-speed);
+}
+
+.task-card:hover:not(.task-card--expired) {
+    transform: translateX(8px);
+    border-color: var(--color-primary-300);
+}
+
+.task-card--expired {
+    background-color: var(--color-neutral-50);
+    opacity: 0.8;
+}
+
+/* Custom Checkbox */
+.task-card__checkbox {
+    position: relative;
+    width: 30px;
+    height: 30px;
+}
+
+.task-card__checkbox input {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.custom-checkbox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 30px;
+    width: 30px;
+    background-color: var(--color-white);
+    border: 2px solid var(--color-neutral-300);
+    border-radius: 8px;
+}
+
+.task-card__checkbox input:checked ~ .custom-checkbox {
+    background-color: var(--color-primary-500);
+    border-color: var(--color-primary-500);
+}
+
+.custom-checkbox::after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 10px;
+    top: 5px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+
+.task-card__checkbox input:checked ~ .custom-checkbox::after {
+    display: block;
+}
+
+.custom-checkbox.disabled {
+    background-color: var(--color-neutral-200);
+}
+
+/* Contenido Tarea */
+.task-card__content {
+    flex-grow: 1;
+}
+
+.task-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.task-title-row label {
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-body-lg);
+    color: var(--color-neutral-800);
+    cursor: pointer;
+}
+
+.task-description {
+    font-size: var(--font-size-label);
+    color: var(--color-neutral-500);
+    margin: 0;
+}
+
+.points-badge {
+    font-family: var(--font-headline);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-neutral-800);
+    font-size: var(--font-size-body-md);
+}
+
+.status-tag {
+    font-size: 0.65rem;
+    font-weight: var(--font-weight-bold);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    margin-right: auto;
+    margin-left: var(--spacing-sm);
+}
+
+.status-tag--danger {
+    background-color: var(--color-tertiary-500);
+    color: var(--color-white);
+}
+
+/* =========================================
+   AJUSTES RÁPIDOS
+   ========================================= */
+.adjustments-section {
+    margin-top: var(--spacing-xl);
+}
+
+.section-title {
+    font-size: var(--font-size-label);
+    color: var(--color-neutral-500);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-md);
+    letter-spacing: 1px;
+}
+
+.button-group {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.btn-sos {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border-radius: var(--radius-pill);
+    border: none;
+    font-family: var(--font-label);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-white);
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-sos:active { transform: scale(0.98); }
+
+.btn-sos--primary { background-color: var(--color-primary-500); }
+.btn-sos--danger { background-color: var(--color-tertiary-500); }
+
+.margin-right { margin-right: 8px; }
+
+/* =========================================
+   TARJETA SALDO (DERECHA)
+   ========================================= */
+.balance-card {
+    background-color: var(--color-secondary-50);
+    border: 2px solid var(--color-secondary-200);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl) var(--spacing-md);
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.star-icon-container {
+    width: 50px;
+    height: 50px;
+    background-color: var(--color-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--spacing-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.balance-label {
+    font-size: var(--font-size-label-sm);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-secondary-700);
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+.balance-value {
+    font-family: var(--font-headline);
+    font-size: 4rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-secondary-500);
+    line-height: 1;
+    margin-bottom: var(--spacing-md);
+}
+
+.balance-value .pts {
+    font-size: var(--font-size-h3);
+    margin-left: 4px;
+}
+
+.balance-footer {
+    font-size: var(--font-size-label-sm);
+    color: var(--color-secondary-600);
+    font-style: italic;
+}
+
+/* =========================================
+   HISTORIAL RECIENTE (DERECHA)
+   ========================================= */
+.history-card {
+    background-color: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.history-header h3 {
+    font-size: var(--font-size-label);
+    color: var(--color-neutral-600);
+    font-weight: var(--font-weight-bold);
+    margin: 0;
+}
+
+.view-all-link {
+    font-size: var(--font-size-label-sm);
+    color: var(--color-primary-500);
+    text-decoration: none;
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.history-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.history-item__icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.history-item__info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.history-item__info strong {
+    font-size: var(--font-size-label);
+    color: var(--color-neutral-800);
+}
+
+.history-item__info span {
+    font-size: var(--font-size-label-sm);
+    color: var(--color-neutral-500);
+}
+
+.history-item__points {
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-body-md);
+}
+
+/* Utilidades extras */
+.bg-primary-light { background-color: var(--color-primary-100); }
+.bg-tertiary-light { background-color: var(--color-tertiary-100); }
+.text-primary { color: var(--color-primary-600); }
+.text-danger { color: var(--color-tertiary-500); }
+.icon-primary { --sds-c-icon-color-foreground-default: var(--color-primary-600); }
+.icon-danger { --sds-c-icon-color-foreground-default: var(--color-tertiary-500); }

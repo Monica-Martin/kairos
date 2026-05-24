@@ -1,0 +1,149 @@
+<template>
+    <div class="routine-container">
+        <c-ctz-header title="Dashboard" subtitle="Visión general de las tareas y los puntos"></c-ctz-header>
+
+        <div class="routine-grid">
+            
+            <div class="main-column">
+                
+                <div class="tasks-section">
+                    <div class="task-card">
+                        <div class="task-card__checkbox">
+                            <input type="checkbox" id="task1" />
+                            <span class="custom-checkbox"></span>
+                        </div>
+                        <div class="task-card__content">
+                            <div class="task-title-row">
+                                <label for="task1">Desayuno Completo</label>
+                                <span class="points-badge">+ 10</span>
+                            </div>
+                            <p class="task-description">Completar antes de las 8:30 AM sin distracciones.</p>
+                        </div>
+                    </div>
+
+                    <div class="task-card">
+                        <div class="task-card__checkbox">
+                            <input type="checkbox" id="task2" />
+                            <span class="custom-checkbox"></span>
+                        </div>
+                        <div class="task-card__content">
+                            <div class="task-title-row">
+                                <label for="task2">Preparar Mochila</label>
+                                <span class="points-badge">+ 5</span>
+                            </div>
+                            <p class="task-description">Revisar agenda escolar y materiales.</p>
+                        </div>
+                    </div>
+
+                    <div class="task-card task-card--expired">
+                        <div class="task-card__checkbox">
+                            <input type="checkbox" disabled />
+                            <span class="custom-checkbox disabled"></span>
+                        </div>
+                        <div class="task-card__content">
+                            <div class="task-title-row">
+                                <label>Recoger habitación</label>
+                                <span class="status-tag status-tag--danger">EXPIRADA</span>
+                                <span class="points-badge text-muted">0</span>
+                            </div>
+                            <p class="task-description">Tiempo límite superado (Bloqueada: t > TRUE).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="adjustments-section">
+                    <h2 class="section-title">AJUSTES RÁPIDOS (S.O.S.)</h2>
+                    <div class="button-group">
+                        <button class="btn-sos btn-sos--primary" onclick={handleManualReward}>
+                            <lightning-icon icon-name="utility:add" size="x-small" variant="inverse" class="margin-right"></lightning-icon>
+                            Premio Manual
+                        </button>
+                        <button class="btn-sos btn-sos--danger" onclick={handleManualPenalty}>
+                            <lightning-icon icon-name="utility:dash" size="x-small" variant="inverse" class="margin-right"></lightning-icon>
+                            Castigo Manual
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="side-column">
+                
+                <div class="balance-card">
+                    <div class="star-icon-container">
+                        <lightning-icon icon-name="utility:favorite" size="medium" variant="warning"></lightning-icon>
+                    </div>
+                    <p class="balance-label">SALDO ACTUAL</p>
+                    <div class="balance-value">
+                        245<span class="pts">pts</span>
+                    </div>
+
+                </div>
+
+                <div class="history-card">
+                    <div class="history-header">
+                        <h3>HISTORIAL RECIENTE</h3>
+                        <a href="#" class="view-all-link">Ver todo</a>
+                    </div>
+                    
+                    <div class="history-list">
+                        <div class="history-item">
+                            <div class="history-item__icon bg-primary-light">
+                                <lightning-icon icon-name="utility:check" size="xx-small" class="icon-primary"></lightning-icon>
+                            </div>
+                            <div class="history-item__info">
+                                <strong>Desayuno Completo</strong>
+                                <span>Hoy, 8:15 AM</span>
+                            </div>
+                            <div class="history-item__points text-primary">+10</div>
+                        </div>
+
+                        <div class="history-item">
+                            <div class="history-item__icon bg-primary-light">
+                                <lightning-icon icon-name="utility:check" size="xx-small" class="icon-primary"></lightning-icon>
+                            </div>
+                            <div class="history-item__info">
+                                <strong>Preparar Mochila</strong>
+                                <span>Ayer, 20:30 PM</span>
+                            </div>
+                            <div class="history-item__points text-primary">+5</div>
+                        </div>
+
+                        <div class="history-item">
+                            <div class="history-item__icon bg-tertiary-light">
+                                <lightning-icon icon-name="utility:dash" size="xx-small" class="icon-danger"></lightning-icon>
+                            </div>
+                            <div class="history-item__info">
+                                <strong>Pelea con hermano</strong>
+                                <span>Ayer, 18:00 PM</span>
+                            </div>
+                            <div class="history-item__points text-danger">-15</div>
+                        </div>
+
+                        <div class="history-item">
+                            <div class="history-item__icon bg-neutral-200">
+                                <lightning-icon icon-name="utility:cart" size="xx-small"></lightning-icon>
+                            </div>
+                            <div class="history-item__info">
+                                <strong>Canje: Helado</strong>
+                                <span>Lun, 14 Oct</span>
+                            </div>
+                            <div class="history-item__points">-50</div>
+                        </div>
+
+                        <div class="history-item">
+                            <div class="history-item__icon bg-primary-light">
+                                <lightning-icon icon-name="utility:check" size="xx-small" class="icon-primary"></lightning-icon>
+                            </div>
+                            <div class="history-item__info">
+                                <strong>Bono Fin de Semana</strong>
+                                <span>Dom, 13 Oct</span>
+                            </div>
+                            <div class="history-item__points text-primary">+20</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</template>

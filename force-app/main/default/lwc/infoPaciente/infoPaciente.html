@@ -1,0 +1,33 @@
+<template>
+    <div class="header-banner" if:true={paciente}>
+        
+        <div class="profile-meta">
+            <div class="avatar-container">
+                <div class="avatar-photo"></div>
+                <div class="status-indicator"></div>
+            </div>
+            
+            <div class="info-block">
+                <div class="name-row">
+                    <h2 class="patient-name">{paciente.Name}</h2>
+                    <span class="age-badge">{edadFormateada}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="balance-section">
+            <span class="balance-title">PUNTOS ACTUALES</span>
+            <div class="balance-badge">
+                <lightning-icon icon-name="utility:favorite" size="x-small" variant="warning"></lightning-icon>
+                <span class="balance-value">{puntosFormateados}</span>
+            </div>
+        </div>
+
+        <div class="vertical-divider"></div>
+
+        <div class="actions-section">
+            <slot></slot>
+        </div>
+
+    </div>
+</template>

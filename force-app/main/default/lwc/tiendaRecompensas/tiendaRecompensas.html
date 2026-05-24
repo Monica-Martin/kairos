@@ -1,0 +1,63 @@
+<template>
+    <div class="store-container">
+        
+        <c-ctz-header title="Tienda de Recompensas" subtitle="Canjea tus puntos por premios y experiencias."></c-ctz-header>
+
+        <div class="balance-banner">
+            <div class="balance-info">
+                <div class="icon-circle">
+                    <lightning-icon icon-name="utility:favorite" size="medium" variant="inverse"></lightning-icon>
+                </div>
+                <div class="balance-text">
+                    <p>Tu saldo actual es de:</p>
+                    <div class="points-display">
+                        <span class="sparkles">✨</span>
+                        <h2>{puntosTotalesFormateados}</h2>
+                        <span class="label-puntos">PUNTOS</span>
+                        <span class="sparkles">✨</span>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="btn-quick-redeem" onclick={openModal}>
+                <lightning-icon icon-name="utility:build" size="x-small" variant="inverse" class="margin-right"></lightning-icon>
+                Canjeo Rápido Manual
+            </button>
+        </div>
+
+        <div class="rewards-grid">
+            
+            <template for:each={recompensas} for:item="recompensa">
+                <c-card-tienda key={recompensa.Id} recompensa={recompensa} onredeemreward={handleRedeemReward}>></c-card-tienda>
+            </template>
+
+            <template if:false={recompensas.length}>
+                <div class="slds-col slds-size_1-of-1 slds-m-top_large slds-text-align_center text-muted">
+                    <p>No hay recompensas configuradas para este paciente.</p>
+                </div>
+            </template>
+
+        </div>
+
+        <c-modal title="Canjeo Rápido Manual" is-open={isModalOpen} onclose={closeModal}>
+            <div class="slds-p-around_medium">
+                <p class="slds-m-bottom_medium text-muted">Utiliza esta opción para hacer ajustes manuales o canjear premios fuera de catálogo.</p>
+                
+                <div class="slds-grid slds-wrap slds-gutters">
+                    <div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+                        <lightning-input type="number" label="Puntos a restar" value={puntosACanjear} onchange={handleInputChange} data-field="puntos" required min="1"></lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1">
+                        <lightning-textarea label="Motivo del canjeo (Opcional)" value={motivoCanjeo} onchange={handleInputChange} data-field="motivo" placeholder="Ej: Cine en familia..."></lightning-textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="custom-modal-footer slds-m-top_large">
+                <button class="btn-cancel" onclick={closeModal}>Cancelar</button>
+                <button class="btn-save" onclick={ejecutarCanjeo}>Confirmar Canjeo</button>
+            </div>
+        </c-modal>
+
+    </div>
+</template>

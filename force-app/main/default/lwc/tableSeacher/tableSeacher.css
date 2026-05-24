@@ -1,0 +1,29 @@
+.search-container {
+    width: 100%;
+    padding: 0.5rem 0;
+    gap: 1rem; /* Añade un espacio elegante entre el input y el botón */
+}
+
+.input-main {
+    flex-grow: 1; 
+    max-width: 600px; /* Evita que ocupe toda la pantalla en monitores gigantes */
+    min-width: 25rem; /* Obliga a que sea lo bastante ancho para leer el placeholder entero */
+}
+
+.input-extra {
+    flex-grow: 0;
+    flex-basis: 15rem;
+    flex-shrink: 0;
+}
+
+.button-col {
+    flex-grow: 0;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+}
+
+lightning-input, 
+lightning-combobox {
+    width: 100%;
+}

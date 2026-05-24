@@ -4,7 +4,9 @@ import myResource from '@salesforce/resourceUrl/toSR'
 
 export default class LandingPage extends LightningElement {
 
-connectedCallback() {
+    imgLanding = myResource + '/toSR/img/imgLanding1.webp'
+
+    connectedCallback() {
         loadStyle(this, myResource + '/toSR/commonstyles.css')
     }
 
